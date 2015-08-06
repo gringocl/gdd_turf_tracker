@@ -11,10 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150806183003) do
+ActiveRecord::Schema.define(version: 20150806212544) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "crops", force: :cascade do |t|
+    t.integer  "gdd_target"
+    t.string   "name"
+    t.datetime "start_date"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "location_id"
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "zip_code"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "weather_info_id"
+    t.integer  "user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -33,5 +51,14 @@ ActiveRecord::Schema.define(version: 20150806183003) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "weather_infos", force: :cascade do |t|
+    t.float    "max_temp"
+    t.float    "min_temp"
+    t.datetime "date"
+    t.float    "base_temp"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
 end
