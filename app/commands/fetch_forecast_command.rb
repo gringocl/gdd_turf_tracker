@@ -13,8 +13,23 @@ class FetchForecastCommand
       options[:time] = @requested_date
     end
 
-    ForecastIO.forecast(@latitude, @longitude, options)
-  end
+    forecast_response = ForecastIO.forecast(@latitude, @longitude, options)
 
+    formatted_response = []
+
+    if forecast_response
+      forecast_response[:daily][:data].map do |day|
+        formatted_day = {}
+        formatted_time = Time.at(day[:time])
+        formatted_day[:name] = Date::DAYNAMES[formatted_time.wday]
+        formatted_day[:time] = day[:time]
+        formatted_day[:minTemp] = day[:temperatureMin]
+        formatted_day[:maxTemp] = day[:temperatureMax]
+        formatted_response << formatted_day
+      end
+    end
+
+      formatted_response
+  end
 
 end
