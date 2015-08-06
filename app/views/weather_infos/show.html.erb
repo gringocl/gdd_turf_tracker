@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Max temp:</strong>
+  <%= @weather_info.max_temp %>
+</p>
+
+<p>
+  <strong>Min temp:</strong>
+  <%= @weather_info.min_temp %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @weather_info.date %>
+</p>
+
+<p>
+  <strong>Base temp:</strong>
+  <%= @weather_info.base_temp %>
+</p>
+
+<%= link_to 'Edit', edit_weather_info_path(@weather_info) %> |
+<%= link_to 'Back', weather_infos_path %>
