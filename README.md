@@ -13,9 +13,10 @@ Weather Info
   - Base Temp for GDD calc 10c or 50f / V2 User preference
 
 Rails api
-  - User, first_name, email, phone, location
-  - user has_many crops, gdd_target, name, start_date
-  - weather_info belongs_to crop, max_temp, min_temp, date, base_temp 
+- User, first_name, email, phone, has_many locations
+- Location has_many crops, name, zip_code
+  - Crop, belongs_to location, gdd_target, name, start_date
+  - WeatherInfo belongs_to location, max_temp, min_temp, date, base_temp
 
 Weather api wrapper
   - [darkskyapp/forecast-ruby](https://github.com/darkskyapp/forecast-ruby)
