@@ -11,7 +11,7 @@ RSpec.describe "crops/new", type: :view do
   it "renders new crop form" do
     render
 
-    assert_select "form[action=?][method=?]", crops_path, "post" do
+    assert_select "form[action=?][method=?]", location_crops_path, "post" do
 
       assert_select "input#crop_gdd_target[name=?]", "crop[gdd_target]"
 

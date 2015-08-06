@@ -18,9 +18,9 @@
         <td><%= crop.gdd_target %></td>
         <td><%= crop.name %></td>
         <td><%= crop.start_date %></td>
-        <td><%= link_to 'Show', crop %></td>
-        <td><%= link_to 'Edit', edit_crop_path(crop) %></td>
-        <td><%= link_to 'Destroy', crop, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', location_crop_path(@location, crop) %></td>
+        <td><%= link_to 'Edit', edit_location_crop_path(@location, crop) %></td>
+        <td><%= link_to 'Destroy', location_crop_path(@location, crop), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Crop', new_crop_path %>
+<%= link_to 'New Crop', new_location_crop_path(@location) %>

@@ -1,5 +1,6 @@
 class CropsController < ApplicationController
   before_action :set_crop, only: [:show, :edit, :update, :destroy]
+  before_action :set_location
 
   # GET /crops
   # GET /crops.json
@@ -28,7 +29,7 @@ class CropsController < ApplicationController
 
     respond_to do |format|
       if @crop.save
-        format.html { redirect_to @crop, notice: 'Crop was successfully created.' }
+        format.html { redirect_to location_crop_path(@location, @crop), notice: 'Crop was successfully created.' }
         format.json { render :show, status: :created, location: @crop }
       else
         format.html { render :new }
@@ -42,7 +43,7 @@ class CropsController < ApplicationController
   def update
     respond_to do |format|
       if @crop.update(crop_params)
-        format.html { redirect_to @crop, notice: 'Crop was successfully updated.' }
+        format.html { redirect_to location_crop_path(@location, @crop), notice: 'Crop was successfully updated.' }
         format.json { render :show, status: :ok, location: @crop }
       else
         format.html { render :edit }
@@ -56,7 +57,7 @@ class CropsController < ApplicationController
   def destroy
     @crop.destroy
     respond_to do |format|
-      format.html { redirect_to crops_url, notice: 'Crop was successfully destroyed.' }
+      format.html { redirect_to location_crops_url, notice: 'Crop was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -67,8 +68,12 @@ class CropsController < ApplicationController
       @crop = Crop.find(params[:id])
     end
 
+    def set_location
+      @location = Location.find(params[:location_id])
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def crop_params
-      params.require(:crop).permit(:gdd_target, :name, :start_date)
+      params.require(:crop).permit(:gdd_target, :name, :start_date, :location, :id)
     end
 end
