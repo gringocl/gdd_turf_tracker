@@ -4,8 +4,12 @@ require 'forecast_io'
 describe 'FetchForecastCommand' do
   let(:longitude) { 1 }
   let(:latitude) { 45 }
-  let(:options) { {params: { exclude: 'currently, minutely, hourly, daily, alerts, flags'}} }
+  let(:options) { {params: { exclude: 'currently,minutely,hourly,alerts,flags'}} }
   let(:subject) { FetchForecastCommand.new(latitude, longitude) }
+
+  before do
+    allow(ForecastIO).to receive(:forecast)
+  end
 
   it 'should use the provided long/lat in the request' do
     expect(ForecastIO).to receive(:forecast).with(latitude, longitude, options)
@@ -20,5 +24,43 @@ describe 'FetchForecastCommand' do
       expect(ForecastIO).to receive(:forecast).with(latitude, longitude, options)
       subject.perform()
     end
+  end
+
+  let(:fake_utc_time) { 123 }
+  let(:expected_date_time) { DateTime.now }
+  let(:forecast_response) {{daily: {
+                               data: [
+                                 {
+                                   temperatureMin: 1,
+                                   temperatureMax: 1,
+                                   time: fake_utc_time
+                                 },
+                                 {
+                                   temperatureMin: 1,
+                                   temperatureMax: 1,
+                                   time: fake_utc_time
+                                 },
+                                 {
+                                   temperatureMin: 1,
+                                   temperatureMax: 1,
+                                   time: fake_utc_time
+                                 }
+                               ]
+                             }
+                           }}
+
+  it 'should return expected results' do
+
+    Time.stub(:at).with(fake_utc_time) { expected_date_time }
+
+    day1 = { name: Date::DAYNAMES[expected_date_time.wday], minTemp: 1, maxTemp: 1, time: fake_utc_time }
+    day2 = { name: Date::DAYNAMES[expected_date_time.wday], minTemp: 1, maxTemp: 1, time: fake_utc_time }
+    day3 = { name: Date::DAYNAMES[expected_date_time.wday], minTemp: 1, maxTemp: 1, time: fake_utc_time }
+
+    allow(ForecastIO).to receive(:forecast) { forecast_response }
+
+    expected_results = [day1, day2, day3]
+
+    expect(subject.perform()).to eql expected_results
   end
 end
