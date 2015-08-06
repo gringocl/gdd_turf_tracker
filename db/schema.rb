@@ -28,9 +28,8 @@ ActiveRecord::Schema.define(version: 20150806212544) do
   create_table "locations", force: :cascade do |t|
     t.string   "name"
     t.integer  "zip_code"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.integer  "weather_info_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer  "user_id"
   end
 
@@ -57,8 +56,9 @@ ActiveRecord::Schema.define(version: 20150806212544) do
     t.float    "min_temp"
     t.datetime "date"
     t.float    "base_temp"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "location_id"
   end
 
 end
