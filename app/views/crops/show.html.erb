@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Gdd target:</strong>
+  <%= @crop.gdd_target %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @crop.name %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @crop.start_date %>
+</p>
+
+<%= link_to 'Edit', edit_crop_path(@crop) %> |
+<%= link_to 'Back', crops_path %>

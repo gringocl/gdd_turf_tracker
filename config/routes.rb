@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :crops
   resources :locations
   devise_for :users, path: ''
   # The priority is based upon order of creation: first created -> highest priority.
