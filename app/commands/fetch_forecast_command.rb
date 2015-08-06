@@ -8,10 +8,13 @@ class FetchForecastCommand
   end
 
   def perform
+    options = { params: {exclude: 'currently,minutely,hourly,alerts,flags'} }
     if @requested_date
-      ForecastIO.forecast(@latitude, @longitude, {time: @requested_date})
-    else
-      ForecastIO.forecast(@latitude, @longitude)
+      options[:time] = @requested_date
     end
+
+    ForecastIO.forecast(@latitude, @longitude, options)
   end
+
+
 end
