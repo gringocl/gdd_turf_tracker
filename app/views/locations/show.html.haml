@@ -1,0 +1,27 @@
+.notice
+
+%p
+  Name:
+  = @location.name
+
+%p
+  Zip Code:
+  = @location.zip_code
+
+%table
+  %thead
+    = link_to 'Add Crop', new_crop_path
+    %tr
+      %td Name
+      %td GDD Target
+      %td Start Date
+  %tbody
+    - @location.crops.each do |crop|
+      %tr
+        %td= crop.name
+        %td= crop.gdd_target
+        %td= crop.start_date
+
+
+= link_to 'Edit', edit_location_path(@location)
+= link_to 'Back', locations_path
