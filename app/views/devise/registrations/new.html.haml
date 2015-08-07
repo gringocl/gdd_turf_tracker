@@ -1,21 +1,18 @@
-%h2 Sign up
-= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-  = devise_error_messages!
-  .field
-    = f.label :email
-    %br/
-    = f.email_field :email, autofocus: true
-  .field
-    = f.label :password
-    - if @minimum_password_length
-      %em
-        (#{@minimum_password_length} characters minimum)
-    %br/
-    = f.password_field :password, autocomplete: "off"
-  .field
-    = f.label :password_confirmation
-    %br/
-    = f.password_field :password_confirmation, autocomplete: "off"
-  .actions
-    = f.submit "Sign up"
-= render "devise/shared/links"
+.ui.container{style: 'margin-top: 120px'}
+  .ui.middle.aligned.center.aligned.grid
+    .ui.segment
+      %h2.ui
+        Sign up
+      = form_for(resource,
+        as: resource_name,
+        url: registration_path(resource_name),
+        html: { class: 'ui large form' }) do |f|
+        .ui
+          .field
+            = f.email_field :email, autofocus: true, placeholder: 'Email'
+          .field
+            = f.password_field :password, autocomplete: "off", placeholder: "Password: '#{@minimum_password_length} characters minimum'"
+          .field
+            = f.password_field :password_confirmation, autocomplete: "off", placeholder: "Password confirmation"
+          .actions
+            = f.submit "Sign up", class: 'ui fluid button large primary'
