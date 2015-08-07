@@ -14,12 +14,16 @@
 
       = yield
 
-    :javascript
-      $('.message .close')
-        .on('click', function() {
-          $(this)
-            .closest('.message')
-            .transition('fade')
-          ;
-        })
-      ;
+      #modal-holder
+
+      = javascript_include_tag 'application'
+
+      :javascript
+        $('.message .close')
+          .on('click', function() {
+            $(this)
+              .closest('.message')
+              .transition('fade')
+            ;
+          })
+        ;

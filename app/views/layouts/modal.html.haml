@@ -1,0 +1,6 @@
+.ui.modal.small
+  %i.close.icon
+  .ui.header.center.middle.aligned.grid
+    = yield :title if content_for? :title
+  .content
+    = yield
