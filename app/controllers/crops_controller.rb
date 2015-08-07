@@ -29,7 +29,7 @@ class CropsController < ApplicationController
 
     respond_to do |format|
       if @crop.save
-        format.html { redirect_to location_crop_path(@location, @crop), notice: 'Crop was successfully created.' }
+        format.html { redirect_to location_path(@location), notice: 'Crop was successfully created.' }
         format.json { render :show, status: :created, location: @crop }
       else
         format.html { render :new }
@@ -43,7 +43,7 @@ class CropsController < ApplicationController
   def update
     respond_to do |format|
       if @crop.update(crop_params)
-        format.html { redirect_to location_crop_path(@location, @crop), notice: 'Crop was successfully updated.' }
+        format.html { redirect_to location_path(@location), notice: 'Crop was successfully updated.' }
         format.json { render :show, status: :ok, location: @crop }
       else
         format.html { render :edit }
@@ -74,6 +74,6 @@ class CropsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def crop_params
-      params.require(:crop).permit(:gdd_target, :name, :start_date, :location, :id)
+      params.require(:crop).permit(:gdd_target, :name, :start_date, :location_id, :id)
     end
 end
