@@ -6,19 +6,11 @@
     = csrf_meta_tags
 
     %title
-      GddTurfTracker
+      TurfTracker
 
     %body.ui.container
       = render "shared/menu"
-
-      - if notice
-        .ui.message.info
-          %i.icon.close
-          = notice
-      - if alert
-        .ui.warning.message
-          %i.icon.close
-          = alert
+      = render 'shared/flash_messages'
 
       = yield
 
