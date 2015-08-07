@@ -8,12 +8,26 @@
     %title
       GddTurfTracker
 
-    %body
+    %body.ui.container
+      = render "shared/menu"
+
       - if notice
         .ui.message.info
+          %i.icon.close
           = notice
       - if alert
         .ui.warning.message
+          %i.icon.close
           = alert
 
       = yield
+
+    :javascript
+      $('.message .close')
+        .on('click', function() {
+          $(this)
+            .closest('.message')
+            .transition('fade')
+          ;
+        })
+      ;
