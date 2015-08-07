@@ -3,7 +3,7 @@
 
   %table.ui.celled.table
     %thead
-      = link_to(new_location_path, class: 'ui labeled icon button') do
+      = link_to(new_location_path, class: 'ui labeled icon button', data: { modal: true }) do
         %i.plus.icon
         New Location
       %tr
@@ -21,7 +21,7 @@
               %i.browser.icon.large
               Details
           %td
-            = link_to(edit_location_path(location)) do
+            = link_to(edit_location_path(location), data: { modal: true }) do
               %i.setting.icon.large
               Edit
           %td

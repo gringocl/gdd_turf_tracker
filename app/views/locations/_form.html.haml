@@ -1,0 +1,15 @@
+= form_for(@location, html: { class: 'ui large form', data: { modal: true } }) do |f|
+  - if @location.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@location.errors.count, "error")
+        prohibited this location from being saved:
+      %ul
+        - @location.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = f.text_field :name, placeholder: 'Name'
+  .field
+    = f.number_field :zip_code, placeholder: 'Zipcode'
+  .actions
+    = f.submit class: 'ui button'
