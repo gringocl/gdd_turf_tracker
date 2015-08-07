@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users, path: ''
-  root 'home#index'
+  root 'locations#index'
 
   resources :locations do
     resources :crops
