@@ -1,11 +1,11 @@
-= render "shared/menu"
-
 .ui.main.container
   %h1.ui.header Listing Locations
 
   %table.ui.celled.table
     %thead
-      = link_to 'New Location', new_location_path
+      = link_to(new_location_path, class: 'ui labeled icon button') do
+        %i.plus.icon
+        New Location
       %tr
         %th Name
         %th Zip code
@@ -16,6 +16,15 @@
         %tr
           %td= location.name
           %td= location.zip_code
-          %td= link_to 'Show', location
-          %td= link_to 'Edit', edit_location_path(location)
-          %td= link_to 'Destroy', location, method: :delete, data: { confirm: 'Are you sure?' }
+          %td
+            = link_to(location) do
+              %i.browser.icon.large
+              Details
+          %td
+            = link_to(edit_location_path(location)) do
+              %i.setting.icon.large
+              Edit
+          %td
+            = link_to(location, method: :delete, data: { confirm: 'Are you sure?' }) do
+              %i.trash.icon.large
+              Delete

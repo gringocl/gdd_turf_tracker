@@ -1,27 +1,32 @@
-= render "shared/menu"
-
-%p
+%h2
   Name:
   = @location.name
 
-%p
+%h3
   Zip Code:
   = @location.zip_code
 
-%table
+.ui.button
+  = link_to(new_location_crop_path(@location)) do
+    %i.plus.icon
+    Add Crop
+
+%table.ui.celled.table.large.segment
   %thead
-    = link_to 'Add Crop', new_location_crop_path(@location)
     %tr
-      %td Name
-      %td GDD Target
-      %td Start Date
+      %th Name
+      %th GDD Target
+      %th Start Date
+      %th{colspan: 2}
   %tbody
     - @location.crops.each do |crop|
       %tr
         %td= crop.name
         %td= crop.gdd_target
-        %td= crop.start_date
+        %td= crop.start_date.to_s(:pretty_date)
+        %td
+          = link_to(edit_location_path(@location), class: 'ui right') do
+            %i.setting.icon
+            Edit
 
-
-= link_to 'Edit', edit_location_path(@location)
 = link_to 'Back', locations_path
